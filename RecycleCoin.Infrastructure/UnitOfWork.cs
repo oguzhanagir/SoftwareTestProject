@@ -13,15 +13,25 @@ namespace RecycleCoin.Infrastructure
     public class UnitOfWork: IUnitOfWork
     {
         private readonly RecycleCoinDbContext _context;
-        private UserRepository _userRepository;
+
+        public IUserRepository Users { get; private set; }
 
         public UnitOfWork(RecycleCoinDbContext context,UserRepository userRepository)
         {
             this._context = context;
-            this._userRepository = userRepository;
+            Users = new UserRepository(_context);
             
         }
 
-        public IUserRepository Users => _userRepository = _userRepository ?? new UserRepository(_context);
+        public int Complete()
+        {
+            return _context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
+
     }
 }

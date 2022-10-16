@@ -1,7 +1,12 @@
 
 
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.EntityFrameworkCore;
+using RecycleCoin.Core;
+using RecycleCoin.Infrastructure;
+using RecycleCoin.Infrastructure.Concrete;
 
+var builder = WebApplication.CreateBuilder(args);
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

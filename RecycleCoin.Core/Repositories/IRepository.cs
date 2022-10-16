@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,13 +9,13 @@ namespace RecycleCoin.Core.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        List<T> List(); //Listeleme Methodu
-
-        int Insert(T p);    //Ekleme Methodu
-
-        int Update(T p);    //Güncelleme Methodu
-        int Delete(T p);    //Silme Methodu
-        T GetByID(int id);  //ID ye Göre Bilgi Getirme
+        T? GetById(int id);
+        IEnumerable<T> GetAll();
+        IEnumerable<T> Find(Expression<Func<T, bool>> expression);
+        void Add(T entity);
+        void AddRange(IEnumerable<T> entities);
+        void Remove(T entity);
+        void RemoveRange(IEnumerable<T> entities);
 
     }
 }

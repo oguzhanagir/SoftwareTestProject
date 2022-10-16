@@ -3,6 +3,7 @@ using RecycleCoin.Core.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,36 +11,48 @@ namespace RecycleCoin.Infrastructure.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        protected readonly DbContext Context;
+        protected readonly DbContext _context;
+       
 
         public Repository(DbContext context)
         {
-            this.Context = context;
+            _context = context;
         }
 
-        public int Delete(T p)
+        public void Add(T entity)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().Add(entity);
         }
 
-        public T GetByID(int id)
+        public void AddRange(IEnumerable<T> entities)
         {
-            throw new NotImplementedException();
+            _context.Set<T>().AddRange(entities);
         }
 
-        public int Insert(T p)
+  
+        public IEnumerable<T> Find(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Where(expression);
         }
 
-        public List<T> List()
+        public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().ToList();
         }
 
-        public int Update(T p)
+        public T? GetById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Set<T>().Find(id);
+        }
+
+        public void Remove(T entity)
+        {
+            _context.Set<T>().Remove(entity);
+        }
+
+        public void RemoveRange(IEnumerable<T> entities)
+        {
+            _context.Set<T>().RemoveRange(entities);
         }
     }
 }

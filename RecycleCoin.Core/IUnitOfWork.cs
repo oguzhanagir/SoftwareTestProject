@@ -7,14 +7,11 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Core
 {
-    public class IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IUserRepository? Users { get; }
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        int Complete();
+        
 
     }
 }
