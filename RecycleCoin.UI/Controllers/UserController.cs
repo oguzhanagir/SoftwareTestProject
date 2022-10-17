@@ -6,10 +6,12 @@ namespace RecycleCoin.UI.Controllers
     public class UserController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUnitOfWork unitOfWork)
+        public UserController(ILogger<UserController> logger,IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _logger = logger;
         }
 
         public IActionResult Index()
@@ -20,11 +22,17 @@ namespace RecycleCoin.UI.Controllers
         public IActionResult GetAllUsers()
         {
             var userList = _unitOfWork.Users.GetAll();
-            if (userList == null)
+
+            _unitOfWork.Complete();
+            if (userList is not null)
+            {
+                return View(userList);
+            }
+            else
             {
                 return NotFound();
             }
-            return View(userList);
+           
         }
 
 

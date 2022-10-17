@@ -15,7 +15,10 @@ namespace RecycleCoin.Infrastructure.Concrete
 
         public DbSet<User>? Users { get; set; }
 
-  
+        public RecycleCoinDbContext(DbContextOptions<RecycleCoinDbContext> options):base(options) 
+        {
+
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=RecyleCoinDb; integrated security=true;");
