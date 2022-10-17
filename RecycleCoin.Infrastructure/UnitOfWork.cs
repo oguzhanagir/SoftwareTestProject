@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using RecycleCoin.Core;
-using RecycleCoin.Core.Repositories;
+﻿using RecycleCoin.Core.Repositories;
 using RecycleCoin.Infrastructure.Concrete;
 using RecycleCoin.Infrastructure.Repositories;
 using System;
@@ -13,29 +11,24 @@ namespace RecycleCoin.Infrastructure
 {
     public class UnitOfWork: IUnitOfWork
     {
-        private readonly RecycleCoinDbContext _context;
-        private readonly ILogger _logger;
+        private RecycleCoinDbContext _context;
 
-
-        public IUserRepository Users { get; private set; }
-
-        public UnitOfWork(RecycleCoinDbContext context, ILoggerFactory loggerFactory)
+        public UnitOfWork(RecycleCoinDbContext context)
         {
-            this._context = context;
-            _logger = loggerFactory.CreateLogger("logs");
-            Users = new UserRepository(context, _logger);
-
+            _context = context;
+            User = new UserRepository(this._context);
         }
 
-        public int Complete()
-        {
-            return _context.SaveChanges();
-        }
+        public IUserRepository User { get; private set; }
 
         public void Dispose()
         {
             _context.Dispose();
         }
 
+        public int Save()
+        {
+            return _context.SaveChanges();
+        }
     }
 }

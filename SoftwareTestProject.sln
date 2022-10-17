@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecycleCoin.Core", "Recycle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecycleCoin.Infrastructure", "RecycleCoin.Infrastructure\RecycleCoin.Infrastructure.csproj", "{D476AE0D-EF7F-4254-80DA-5BAD557C842F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecycleCoin.UI", "RecycleCoin.UI\RecycleCoin.UI.csproj", "{1E6247A8-E0F0-4274-A326-B299654DAF9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecycleCoin.Api", "RecycleCoin.Api\RecycleCoin.Api.csproj", "{4BEBCF60-8D7D-4C55-8D36-A3312C2A2828}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{D476AE0D-EF7F-4254-80DA-5BAD557C842F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D476AE0D-EF7F-4254-80DA-5BAD557C842F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D476AE0D-EF7F-4254-80DA-5BAD557C842F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E6247A8-E0F0-4274-A326-B299654DAF9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E6247A8-E0F0-4274-A326-B299654DAF9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E6247A8-E0F0-4274-A326-B299654DAF9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E6247A8-E0F0-4274-A326-B299654DAF9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BEBCF60-8D7D-4C55-8D36-A3312C2A2828}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEBCF60-8D7D-4C55-8D36-A3312C2A2828}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEBCF60-8D7D-4C55-8D36-A3312C2A2828}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEBCF60-8D7D-4C55-8D36-A3312C2A2828}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

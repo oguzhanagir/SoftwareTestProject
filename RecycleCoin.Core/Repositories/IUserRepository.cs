@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Core.Repositories
 {
-    public interface IUserRepository: IRepository<User>
+    public interface IUserRepository: IGenericRepository<User>
     {
         // Usera özel özellikler eklenecektir
 
