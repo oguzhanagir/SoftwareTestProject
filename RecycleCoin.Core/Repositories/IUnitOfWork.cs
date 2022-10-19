@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Core.Repositories
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork
     {
         IUserRepository User { get; }
-
         int Save();
+
     }
 }

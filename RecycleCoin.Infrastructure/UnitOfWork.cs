@@ -1,4 +1,5 @@
-﻿using RecycleCoin.Core.Repositories;
+﻿using RecycleCoin.Core.Models;
+using RecycleCoin.Core.Repositories;
 using RecycleCoin.Infrastructure.Concrete;
 using RecycleCoin.Infrastructure.Repositories;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Infrastructure
 {
-    public class UnitOfWork: IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private RecycleCoinDbContext _context;
 
@@ -21,10 +22,7 @@ namespace RecycleCoin.Infrastructure
 
         public IUserRepository User { get; private set; }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
+   
 
         public int Save()
         {

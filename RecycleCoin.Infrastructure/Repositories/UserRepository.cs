@@ -11,7 +11,7 @@ namespace RecycleCoin.Infrastructure.Repositories
 {
     public class UserRepository: GenericRepository<User>,IUserRepository
     {
-        public UserRepository(RecycleCoinDbContext context): base(context)
+        public UserRepository(RecycleCoinDbContext context) : base(context)
         {
 
         }

@@ -13,22 +13,28 @@ namespace RecycleCoin.Infrastructure.Concrete
     public class RecycleCoinDbContext : DbContext
     {
 
-        public DbSet<User>? Users { get; set; }
+       
 
         public RecycleCoinDbContext(DbContextOptions<RecycleCoinDbContext> options):base(options) 
         {
 
         }
+
+        public DbSet<User>? Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=RecyleCoinDb; integrated security=true;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("");
 
+            }
         }
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
            
-
             modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
 

@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Core.Repositories
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T>
     {
-        ValueTask<T?> GetByIdAsync(int id);
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAll();
+        ValueTask<T?> GetById(int id);
         IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
-        Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate);
-        Task AddAsync(T entity);
-        Task AddRangeAsync(IEnumerable<T> entities);
+        Task Add(T entity);
         void Remove(T entity);
-        void RemoveRange(IEnumerable<T> entities);
+
+        void Update(T entity);
+
+
     }
 }

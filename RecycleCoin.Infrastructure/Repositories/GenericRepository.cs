@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using RecycleCoin.Core.Repositories;
 using RecycleCoin.Infrastructure.Concrete;
 using System;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Infrastructure.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T>:IGenericRepository<T> where T: class
     {
         protected readonly RecycleCoinDbContext _context;
         internal DbSet<T> dbSet;
@@ -23,14 +22,9 @@ namespace RecycleCoin.Infrastructure.Repositories
             this.dbSet = context.Set<T>();
         }
 
-        public ValueTask<T?> GetByIdAsync(int id)
+        public async Task Add(T entity)
         {
-            return dbSet.FindAsync(id);
-        }
-
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await dbSet.ToListAsync();
+           await dbSet.AddAsync(entity);
         }
 
         public IEnumerable<T> Find(Expression<Func<T, bool>> predicate)
@@ -38,19 +32,14 @@ namespace RecycleCoin.Infrastructure.Repositories
             return dbSet.Where(predicate);
         }
 
-        public Task<T?> SingleOrDefaultAsync(Expression<Func<T, bool>> predicate)
+        public async Task<IEnumerable<T>> GetAll()
         {
-            return dbSet.SingleOrDefaultAsync(predicate);
+            return await dbSet.ToListAsync();
         }
 
-        public async Task AddAsync(T entity)
+        public ValueTask<T?> GetById(int id)
         {
-            await dbSet.AddAsync(entity);
-        }
-
-        public async Task AddRangeAsync(IEnumerable<T> entities)
-        {
-            await dbSet.AddRangeAsync(entities);
+            return dbSet.FindAsync(id);
         }
 
         public void Remove(T entity)
@@ -58,9 +47,9 @@ namespace RecycleCoin.Infrastructure.Repositories
             dbSet.Remove(entity);
         }
 
-        public void RemoveRange(IEnumerable<T> entities)
+        public void Update(T entity)
         {
-            dbSet.RemoveRange(entities);
+            dbSet.Update(entity);
         }
     }
 }

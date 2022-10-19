@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RecycleCoin.Core;
 using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Repositories;
-using RecycleCoin.Infrastructure.Repositories;
 
 namespace RecycleCoin.Api.Controllers
 {
@@ -11,20 +9,19 @@ namespace RecycleCoin.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
-
         public UserController(IUnitOfWork unitOfWork)
         {
-            this._unitOfWork = unitOfWork;
+            UnitOfWork = unitOfWork;
         }
+
+        public IUnitOfWork UnitOfWork { get; }
 
         [HttpGet]
-        public async Task<IEnumerable<User>> GetAlLUsers()
+        public async Task<IEnumerable<User>> GetAllUsers()
         {
-            var userList = await _unitOfWork.User.GetAllAsync();
+            var userList = await UnitOfWork.User.GetAll();
 
             return userList;
-        }
-       
+        } 
     }
 }
