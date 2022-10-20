@@ -23,11 +23,7 @@ namespace RecycleCoin.Infrastructure.Concrete
         public DbSet<User>? Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("");
-
-            }
+           
         }
 
 

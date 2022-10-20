@@ -17,10 +17,10 @@ namespace RecycleCoin.Infrastructure
         public UnitOfWork(RecycleCoinDbContext context)
         {
             _context = context;
-            User = new UserRepository(this._context);
+            Users = new UserRepository(this._context);
         }
 
-        public IUserRepository User { get; private set; }
+        public IUserRepository Users { get; private set; }
 
    
 

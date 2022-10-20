@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecycleCoin.Core.Repositories
+namespace RecycleCoin.Business.Concrete
 {
-    public interface IUnitOfWork
+    public class UserManager
     {
-        IUserRepository Users { get; }
-        int Save();
 
     }
 }
