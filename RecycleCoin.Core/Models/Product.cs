@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Core.Models
 {
-    public class User
+    public class Product
     {
         public int Id { get; set; }
-        public string? FirstName { get; set; }
-        public string? LastName { get; set; }
+        public string? Name { get; set; }
+        public decimal? Quantity { get; set; }
+        public decimal? Point { get; set; }
 
-        public List<Sale>? Sales { get; set; }
-
+        public Category? Category { get; set; }
 
     }
 }

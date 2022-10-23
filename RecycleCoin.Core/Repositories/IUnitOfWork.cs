@@ -9,6 +9,9 @@ namespace RecycleCoin.Core.Repositories
     public interface IUnitOfWork
     {
         IUserRepository Users { get; }
+        ICategoryRepository Category { get; }
+        IProductRepository Products { get; }
+        ISaleRepository Sales { get; }
         int Save();
 
     }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecycleCoin.Infrastructure.Concrete;
 
@@ -11,9 +12,10 @@ using RecycleCoin.Infrastructure.Concrete;
 namespace RecycleCoin.Infrastructure.Migrations
 {
     [DbContext(typeof(RecycleCoinDbContext))]
-    partial class RecycleCoinDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221023123939_mig3")]
+    partial class mig3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace RecycleCoin.Infrastructure.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("RecycleCoin.Core.Models.Sale", b =>
+            modelBuilder.Entity("RecycleCoin.Core.Models.Sales", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -76,12 +78,7 @@ namespace RecycleCoin.Infrastructure.Migrations
                     b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Sales");
                 });
@@ -118,23 +115,9 @@ namespace RecycleCoin.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("RecycleCoin.Core.Models.Sale", b =>
-                {
-                    b.HasOne("RecycleCoin.Core.Models.User", "User")
-                        .WithMany("Sales")
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("RecycleCoin.Core.Models.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("RecycleCoin.Core.Models.User", b =>
-                {
-                    b.Navigation("Sales");
                 });
 #pragma warning restore 612, 618
         }

@@ -19,7 +19,10 @@ namespace RecycleCoin.Infrastructure.Configurations
             builder.Property(m => m.FirstName).IsRequired().HasMaxLength(50);
 
             builder.Property(m => m.LastName).IsRequired().HasMaxLength(50);
+
             
+
+
             builder.ToTable("Users");
         }
     }
