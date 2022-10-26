@@ -33,6 +33,11 @@ namespace RecycleCoin.Infrastructure
 
         public ISaleRepository Sales { get; private set; }
 
+        public async Task CommitAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
         public int Save()
         {
             return _context.SaveChanges();

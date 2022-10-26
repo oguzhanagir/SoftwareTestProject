@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RecycleCoin.Business\RecycleCoin.Business.csproj" />
     <ProjectReference Include="..\RecycleCoin.Core\RecycleCoin.Core.csproj" />
     <ProjectReference Include="..\RecycleCoin.Infrastructure\RecycleCoin.Infrastructure.csproj" />
   </ItemGroup>

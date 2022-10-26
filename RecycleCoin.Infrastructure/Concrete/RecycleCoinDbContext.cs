@@ -37,6 +37,9 @@ namespace RecycleCoin.Infrastructure.Concrete
         {
            
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleConfiguration());
         }
 
         

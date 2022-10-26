@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Repositories;
+using RecycleCoin.Core.Services;
 using RecycleCoin.Infrastructure.Concrete;
 
 namespace RecycleCoin.Api.Controllers
@@ -10,20 +11,53 @@ namespace RecycleCoin.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IUnitOfWork unitOfWork;
+        
+        public IUserService? _userService { get; set; }
 
-        public UserController(IUnitOfWork unitOfWork)
+        public UserController(IUserService? userService)
         {
-            this.unitOfWork = unitOfWork;
+            _userService = userService;
         }
-
 
         [HttpGet]
         public async Task<IEnumerable<User>> GetAllUsers()
         {
-            var userList = await unitOfWork.Users.GetAll();
+            var users = await _userService.GetUsers();
 
-            return userList;
-        } 
+            return users;
+        }
+
+        [HttpPost]
+        public async Task AddUser(User user)
+        {
+            await _userService.AddUser(user);
+        }
+
+        [HttpDelete]
+        public void DeleteUser(int id)
+        {
+            _userService.DeleteUser(id);
+
+        }
+
+        [HttpPut]
+        public IActionResult UpdateUser(int id )
+        {
+            _userService.UpdateUser(id);
+           return Ok();
+        }
+
+        [HttpGet("{id}")]
+        public User? GetUser(int id) 
+        {
+            var user = _userService.GetUser(id);
+
+            return user;
+            
+        }
+
+
+
+
     }
 }

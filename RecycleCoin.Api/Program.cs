@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using RecycleCoin.Business.Concrete;
 using RecycleCoin.Core.Repositories;
+using RecycleCoin.Core.Services;
 using RecycleCoin.Infrastructure;
 using RecycleCoin.Infrastructure.Concrete;
 
@@ -13,6 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<RecycleCoinDbContext>(options =>
 options.UseSqlServer("name=ConnectionStrings:DbConnection"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

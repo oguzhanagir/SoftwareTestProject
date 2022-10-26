@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecycleCoin.Infrastructure.Concrete;
 
@@ -11,9 +12,10 @@ using RecycleCoin.Infrastructure.Concrete;
 namespace RecycleCoin.Infrastructure.Migrations
 {
     [DbContext(typeof(RecycleCoinDbContext))]
-    partial class RecycleCoinDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221023203640_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,7 +111,7 @@ namespace RecycleCoin.Infrastructure.Migrations
                     b.HasOne("RecycleCoin.Core.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Category");
                 });
