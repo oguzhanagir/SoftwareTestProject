@@ -1,4 +1,5 @@
-﻿using RecycleCoin.Core.Models;
+﻿using Microsoft.Extensions.Logging;
+using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Repositories;
 using RecycleCoin.Infrastructure.Concrete;
 using System;
@@ -11,7 +12,7 @@ namespace RecycleCoin.Infrastructure.Repositories
 {
     public class UserRepository: GenericRepository<User>,IUserRepository
     {
-        public UserRepository(RecycleCoinDbContext context) : base(context)
+        public UserRepository(RecycleCoinDbContext context,ILogger logger) : base(context, logger)
         {
 
         }

@@ -16,6 +16,8 @@ builder.Services.AddDbContext<RecycleCoinDbContext>(options =>
 options.UseSqlServer("name=ConnectionStrings:DbConnection"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
+builder.Services.AddTransient(typeof(ICategoryService), typeof(CategoryService));
+builder.Services.AddTransient(typeof(ISaleService), typeof(SaleService));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -1,4 +1,5 @@
-﻿using RecycleCoin.Core.Models;
+﻿using Microsoft.Extensions.Logging;
+using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Repositories;
 using RecycleCoin.Core.Services;
 using System;
@@ -13,9 +14,11 @@ namespace RecycleCoin.Business.Concrete
     {
 
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ILogger _logger;
 
-        public UserService(IUnitOfWork unitOfWork)
+        public UserService(IUnitOfWork unitOfWork,ILogger<UserService> logger)
         {
+            _logger = logger;
             this._unitOfWork = unitOfWork;
 
         }
@@ -39,10 +42,8 @@ namespace RecycleCoin.Business.Concrete
         public User? GetUser(long id)
         {
             var users = _unitOfWork.Users.Get(x => x.Id == id);
-            if (users !=null)
-            {
-                return users;
-            }
+            
+            return users;
             
         }
 

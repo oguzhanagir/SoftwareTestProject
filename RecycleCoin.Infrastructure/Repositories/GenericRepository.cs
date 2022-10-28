@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using RecycleCoin.Core.Repositories;
 using RecycleCoin.Infrastructure.Concrete;
 using System;
@@ -13,11 +14,13 @@ namespace RecycleCoin.Infrastructure.Repositories
     public class GenericRepository<T>:IGenericRepository<T> where T: class
     {
         protected readonly RecycleCoinDbContext _context;
+        private readonly ILogger _logger;
         internal DbSet<T> _dbSet;
 
 
-        public GenericRepository(RecycleCoinDbContext context)
+        public GenericRepository(RecycleCoinDbContext context,ILogger logger)
         {
+            _logger = logger;
             this._context = context;
             this._dbSet = context.Set<T>();
         }
