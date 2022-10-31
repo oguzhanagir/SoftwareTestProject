@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace RecycleCoin.Business.Validation.FluentValidation
 {
-    public class CategoryValidator: AbstractValidator<Category>
+    public class SaleValidator:AbstractValidator<Sale>
     {
-        public CategoryValidator()
+        public SaleValidator()
         {
-            RuleFor(customer => customer.Name).NotNull().NotEmpty().WithMessage("Kategori Adı Boş Olamaz")
-                .Length(3, 50);
+            RuleFor(customer => customer.PurchaseDate).NotNull().NotEmpty().WithMessage("Satış Tarihi Boş Olamaz");
         }
     }
 }

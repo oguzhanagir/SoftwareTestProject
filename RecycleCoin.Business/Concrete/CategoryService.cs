@@ -12,16 +12,19 @@ namespace RecycleCoin.Business.Concrete
     public class CategoryService:ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
+       
 
         public CategoryService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+           
         }
 
         public async Task? AddCategory(Category category)
-        { 
-                _unitOfWork.Category.Add(category);
-                await _unitOfWork.CommitAsync();
+        {
+            
+            _unitOfWork.Category.Add(category);
+            await _unitOfWork.CommitAsync();
         }
 
         public void DeleteCategory(long id)

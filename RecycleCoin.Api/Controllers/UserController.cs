@@ -23,35 +23,34 @@ namespace RecycleCoin.Api.Controllers
         public async Task<IEnumerable<User>> GetAllUsers()
         {
             
-            var users = await UserService.GetUsers();
-
+            var users = await UserService!.GetUsers();
             return users;
         }
 
         [HttpPost]
         public async Task AddUser(User user)
         {
-            await UserService.AddUser(user);
+            await UserService!.AddUser(user)!;
         }
 
         [HttpDelete]
         public IActionResult DeleteUser(int id)
         {
-            UserService.DeleteUser(id);
+            UserService!.DeleteUser(id);
             return Ok();
         }
 
         [HttpPut]
         public IActionResult UpdateUser(int id )
         {
-            UserService.UpdateUser(id);
+            UserService!.UpdateUser(id);
            return Ok();
         }
 
         [HttpGet("{id}")]
         public User? GetUser(int id) 
         {
-            var user = UserService.GetUser(id);
+            var user = UserService!.GetUser(id);
             return user;
             
         }

@@ -12,8 +12,10 @@ namespace RecycleCoin.Business.Validation.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(customer => customer.FirstName).NotNull().NotEmpty().Length(1, 50);
-            RuleFor(customer => customer.LastName).NotNull().NotEmpty().Length(1, 50);
+            RuleFor(customer => customer.FirstName).NotNull().NotEmpty().WithMessage("Ad Alanı Boş Olamaz")
+                .Length(1, 50);
+            RuleFor(customer => customer.LastName).NotNull().NotEmpty().WithMessage("Soyad Alanı Boş Olamaz")
+                .Length(1, 50);
         }
     }
 }

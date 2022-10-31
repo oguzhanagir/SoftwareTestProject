@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Services;
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 
 namespace RecycleCoin.Api.Controllers
@@ -11,10 +13,11 @@ namespace RecycleCoin.Api.Controllers
     public class CategoryController : ControllerBase
     {
         private  ICategoryService CategoryService { get; set; }
-
-        public CategoryController(ICategoryService categoryService)
+        private readonly IValidator<Category> _validator;
+        public CategoryController(ICategoryService categoryService, IValidator<Category> validator)
         {
             CategoryService = categoryService;
+            _validator = validator;
         }
 
 
@@ -28,10 +31,17 @@ namespace RecycleCoin.Api.Controllers
 
         [HttpPost]
 
-        public async Task AddCategory(Category category)
+        public async Task<IActionResult>? AddCategory(Category category)
         {
-
-            await CategoryService.AddCategory(category);
+            var validation = await _validator.ValidateAsync(category);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors);
+            
+            }
+            await CategoryService!.AddCategory(category)!;
+            return Ok();
+           
         }
 
         [HttpDelete]

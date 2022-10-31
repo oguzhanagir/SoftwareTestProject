@@ -1,5 +1,8 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using RecycleCoin.Business.Concrete;
+using RecycleCoin.Business.Validation.FluentValidation;
+using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Repositories;
 using RecycleCoin.Core.Services;
 using RecycleCoin.Infrastructure;
@@ -15,9 +18,17 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<RecycleCoinDbContext>(options =>
 options.UseSqlServer("name=ConnectionStrings:DbConnection"));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
+builder.Services.AddScoped<IValidator<Sale>, SaleValidator>();
+builder.Services.AddScoped<IValidator<Category>, CategoryValidator>();
+builder.Services.AddScoped<IValidator<User>, UserValidator>();
+
+
 builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
 builder.Services.AddTransient(typeof(ICategoryService), typeof(CategoryService));
 builder.Services.AddTransient(typeof(ISaleService), typeof(SaleService));
+builder.Services.AddTransient(typeof(IProductService), typeof(ProductService));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
