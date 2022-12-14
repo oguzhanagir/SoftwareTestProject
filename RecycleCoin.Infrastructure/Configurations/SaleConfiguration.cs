@@ -16,7 +16,7 @@ namespace RecycleCoin.Infrastructure.Configurations
 
             builder.HasKey(a => a.Id);
 
-            builder.Property(m => m.Id).UseIdentityColumn();
+            builder.Property(m => m.Id).UseMySqlIdentityColumn();
 
             builder.Property(m => m.PurchaseDate).IsRequired().HasMaxLength(50);
            
@@ -26,7 +26,7 @@ namespace RecycleCoin.Infrastructure.Configurations
                 .WithMany(x => x.Sales)
                 .HasForeignKey(x => x.Id)
                 .IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.ToTable("Sales");
         }

@@ -13,11 +13,11 @@ namespace RecycleCoin.Api.Controllers
     public class CategoryController : ControllerBase
     {
         private  ICategoryService CategoryService { get; set; }
-        private readonly IValidator<Category> _validator;
+    
+
         public CategoryController(ICategoryService categoryService, IValidator<Category> validator)
         {
             CategoryService = categoryService;
-            _validator = validator;
         }
 
 
@@ -33,15 +33,14 @@ namespace RecycleCoin.Api.Controllers
 
         public async Task<IActionResult>? AddCategory(Category category)
         {
-            var validation = await _validator.ValidateAsync(category);
-            if (!validation.IsValid)
+            var result = await CategoryService!.AddCategory(category)!;
+
+            if (!result!.IsValid)
             {
-                return BadRequest(validation.Errors);
-            
+                return BadRequest(result.Errors);
             }
-            await CategoryService!.AddCategory(category)!;
             return Ok();
-           
+
         }
 
         [HttpDelete]

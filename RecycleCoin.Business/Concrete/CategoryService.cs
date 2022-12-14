@@ -1,4 +1,6 @@
-﻿using RecycleCoin.Core.Models;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Repositories;
 using RecycleCoin.Core.Services;
 using System;
@@ -12,19 +14,25 @@ namespace RecycleCoin.Business.Concrete
     public class CategoryService:ICategoryService
     {
         private readonly IUnitOfWork _unitOfWork;
-       
+        private readonly IValidator<Category> _validator;
 
-        public CategoryService(IUnitOfWork unitOfWork)
+        public CategoryService(IUnitOfWork unitOfWork, IValidator<Category> validator)
         {
             _unitOfWork = unitOfWork;
-           
+            _validator = validator;
         }
 
-        public async Task? AddCategory(Category category)
+        public async Task<ValidationResult?> AddCategory(Category category)
         {
-            
-            _unitOfWork.Category.Add(category);
-            await _unitOfWork.CommitAsync();
+            var validation = await _validator.ValidateAsync(category);
+            if (validation.IsValid)
+            {
+                _unitOfWork.Category.Add(category);
+                await _unitOfWork.CommitAsync();
+            }
+        
+            return validation;
+
         }
 
         public void DeleteCategory(long id)

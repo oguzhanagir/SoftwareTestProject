@@ -26,9 +26,14 @@ namespace RecycleCoin.Api.Controllers
         }
 
         [HttpPost]
-        public async Task AddProduct(Product product)
+        public async Task<IActionResult>? AddProduct(Product product)
         {
-            await ProductService!.AddProduct(product)!;
+            var result = await ProductService!.AddProduct(product);
+            if (!result.IsValid)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok();
         }
 
         [HttpDelete]

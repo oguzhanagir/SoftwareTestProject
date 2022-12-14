@@ -15,7 +15,7 @@ namespace RecycleCoin.Infrastructure.Configurations
         {
             builder.HasKey(a => a.Id);
 
-            builder.Property(m => m.Id).UseIdentityColumn();
+            builder.Property(m => m.Id).UseMySqlIdentityColumn();
 
             builder.Property(m => m.Name).IsRequired().HasMaxLength(50);
 

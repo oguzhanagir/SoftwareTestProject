@@ -17,9 +17,14 @@ namespace RecycleCoin.Api.Controllers
         }
 
         [HttpPost]
-        public async Task AddSale(Sale sale)
-        {
-            await SaleService!.AddSale(sale)!;
+        public async Task<IActionResult>? AddSale(Sale sale)
+        {   
+            var result =  await SaleService!.AddSale(sale)!;
+            if (!result.IsValid)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok();
         }
 
         [HttpGet]

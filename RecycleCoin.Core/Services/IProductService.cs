@@ -1,4 +1,5 @@
-﻿using RecycleCoin.Core.Models;
+﻿using FluentValidation.Results;
+using RecycleCoin.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace RecycleCoin.Core.Services
 
         Task<IEnumerable<Product>> GetProducts();
 
-        Task? AddProduct(Product product);
+        Task<ValidationResult?> AddProduct(Product product);
 
         void UpdateProduct(long id);
 

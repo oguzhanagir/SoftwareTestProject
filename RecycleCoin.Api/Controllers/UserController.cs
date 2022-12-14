@@ -28,9 +28,14 @@ namespace RecycleCoin.Api.Controllers
         }
 
         [HttpPost]
-        public async Task AddUser(User user)
+        public async Task<IActionResult>? AddUser(User user)
         {
-            await UserService!.AddUser(user)!;
+            var result = await UserService!.AddUser(user)!;
+            if (!result.IsValid)
+            {
+                return BadRequest(result.Errors);
+            }
+            return Ok();
         }
 
         [HttpDelete]

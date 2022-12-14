@@ -1,4 +1,5 @@
 ﻿using RecycleCoin.Core.Models;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace RecycleCoin.Core.Services
     {
         Task<IEnumerable<Category>> GetCategories();
 
-        Task? AddCategory(Category category);
+        Task<ValidationResult?> AddCategory(Category category);
 
         void DeleteCategory(long id);
 

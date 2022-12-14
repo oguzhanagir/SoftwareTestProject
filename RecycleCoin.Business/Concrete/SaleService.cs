@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using Microsoft.Extensions.Logging;
 using RecycleCoin.Core.Models;
 using RecycleCoin.Core.Repositories;
 using RecycleCoin.Core.Services;
@@ -14,17 +16,23 @@ namespace RecycleCoin.Business.Concrete
     {
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger _logger; 
+        private readonly IValidator<Sale> _validator;
 
-        public SaleService(IUnitOfWork unitOfWork, ILogger<SaleService> logger)
+        public SaleService(IUnitOfWork unitOfWork, IValidator<Sale> validator)
         {
-            _logger = logger;
             _unitOfWork = unitOfWork;
+            _validator = validator;
         }
-        public async Task? AddSale(Sale sale)
+        public async Task<ValidationResult?> AddSale(Sale sale)
         {
-            _unitOfWork.Sales.Add(sale);
-            await _unitOfWork.CommitAsync();
+            var validation = await _validator.ValidateAsync(sale);
+            if (validation.IsValid)
+            {
+                _unitOfWork.Sales.Add(sale);
+                await _unitOfWork.CommitAsync();
+
+            }
+            return validation;
         }
 
         public void DeleteSale(long id)
