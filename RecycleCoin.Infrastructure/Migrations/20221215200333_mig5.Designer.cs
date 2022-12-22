@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecycleCoin.Infrastructure.Concrete;
 
@@ -11,28 +12,15 @@ using RecycleCoin.Infrastructure.Concrete;
 namespace RecycleCoin.Infrastructure.Migrations
 {
     [DbContext(typeof(RecycleCoinDbContext))]
-    partial class RecycleCoinDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221215200333_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("RecycleCoin.Core.Models.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
 
             modelBuilder.Entity("RecycleCoin.Core.Models.Category", b =>
                 {
@@ -75,20 +63,6 @@ namespace RecycleCoin.Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("RecycleCoin.Core.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("RecycleCoin.Core.Models.Sale", b =>
                 {
                     b.Property<int>("Id")
@@ -110,9 +84,6 @@ namespace RecycleCoin.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AddressId")
-                        .HasColumnType("int");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -137,26 +108,7 @@ namespace RecycleCoin.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("RecycleCoin.Core.Models.UserRoleMapping", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserRoleMappings");
                 });
 
             modelBuilder.Entity("RecycleCoin.Core.Models.Product", b =>
@@ -177,20 +129,6 @@ namespace RecycleCoin.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("RecycleCoin.Core.Models.User", b =>
-                {
-                    b.HasOne("RecycleCoin.Core.Models.Address", "Address")
-                        .WithMany("Users")
-                        .HasForeignKey("AddressId");
-
-                    b.Navigation("Address");
-                });
-
-            modelBuilder.Entity("RecycleCoin.Core.Models.Address", b =>
-                {
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("RecycleCoin.Core.Models.Category", b =>

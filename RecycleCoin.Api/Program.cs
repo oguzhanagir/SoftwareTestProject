@@ -21,12 +21,15 @@ builder.Services.AddDbContext<RecycleCoinDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
 builder.Services.AddScoped<IValidator<Sale>, SaleValidator>();
 builder.Services.AddScoped<IValidator<Category>, CategoryValidator>();
 builder.Services.AddScoped<IValidator<User>, UserValidator>();
+
+builder.Services.AddAuthentication();
 
 
 builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
@@ -50,6 +53,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllers();
 

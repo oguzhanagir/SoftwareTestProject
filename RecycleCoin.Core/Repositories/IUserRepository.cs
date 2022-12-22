@@ -9,6 +9,6 @@ namespace RecycleCoin.Core.Repositories
 {
     public interface IUserRepository:IGenericRepository<User>
     {
-
+        User Login(string mail, string password);
     }
 }

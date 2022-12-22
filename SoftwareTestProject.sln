@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecycleCoin.Core", "Recycle
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecycleCoin.Infrastructure", "RecycleCoin.Infrastructure\RecycleCoin.Infrastructure.csproj", "{D476AE0D-EF7F-4254-80DA-5BAD557C842F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecycleCoin.Api", "RecycleCoin.Api\RecycleCoin.Api.csproj", "{4BEBCF60-8D7D-4C55-8D36-A3312C2A2828}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecycleCoin.Api", "RecycleCoin.Api\RecycleCoin.Api.csproj", "{4BEBCF60-8D7D-4C55-8D36-A3312C2A2828}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -21,5 +21,7 @@ namespace RecycleCoin.Core.Services
         void DeleteUser(long id);
 
         void SaveUser();
+
+        User? Login(string mail, string password);
     }
 }

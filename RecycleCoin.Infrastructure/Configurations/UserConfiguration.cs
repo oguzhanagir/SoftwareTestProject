@@ -19,6 +19,8 @@ namespace RecycleCoin.Infrastructure.Configurations
             builder.Property(m => m.FirstName).IsRequired().HasMaxLength(50);
 
             builder.Property(m => m.LastName).IsRequired().HasMaxLength(50);
+            builder.Property(m => m.PasswordHash).IsRequired();
+            builder.Property(m => m.PasswordSalt).IsRequired();
 
             
 

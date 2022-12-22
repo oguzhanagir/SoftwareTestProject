@@ -72,5 +72,14 @@ namespace RecycleCoin.Business.Concrete
                 _unitOfWork.Save();
             }
         }
+
+        public User? Login(string mail, string password)
+        {
+            var user = _unitOfWork!.Users!.Login(mail,password);
+            return user;
+        }
+      
+
+ 
     }
 }

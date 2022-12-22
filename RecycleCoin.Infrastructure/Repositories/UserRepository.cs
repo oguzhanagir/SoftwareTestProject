@@ -16,5 +16,11 @@ namespace RecycleCoin.Infrastructure.Repositories
         {
 
         }
+
+        public User Login(string mail, string password)
+        {
+            var checkMail = _dbSet.FirstOrDefault(x => x.Mail == mail);
+            return checkMail!;
+        }
     }
 }

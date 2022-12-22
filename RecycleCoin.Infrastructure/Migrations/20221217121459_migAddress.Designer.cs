@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecycleCoin.Infrastructure.Concrete;
 
@@ -11,9 +12,10 @@ using RecycleCoin.Infrastructure.Concrete;
 namespace RecycleCoin.Infrastructure.Migrations
 {
     [DbContext(typeof(RecycleCoinDbContext))]
-    partial class RecycleCoinDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221217121459_migAddress")]
+    partial class migAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,20 +77,6 @@ namespace RecycleCoin.Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("RecycleCoin.Core.Models.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-                });
-
             modelBuilder.Entity("RecycleCoin.Core.Models.Sale", b =>
                 {
                     b.Property<int>("Id")
@@ -140,23 +128,6 @@ namespace RecycleCoin.Infrastructure.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Users", (string)null);
-                });
-
-            modelBuilder.Entity("RecycleCoin.Core.Models.UserRoleMapping", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserRoleMappings");
                 });
 
             modelBuilder.Entity("RecycleCoin.Core.Models.Product", b =>

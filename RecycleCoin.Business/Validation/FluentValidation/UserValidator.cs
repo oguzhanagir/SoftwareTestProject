@@ -16,6 +16,10 @@ namespace RecycleCoin.Business.Validation.FluentValidation
                 .Length(1, 50);
             RuleFor(customer => customer.LastName).NotNull().NotEmpty().WithMessage("Soyad Alanı Boş Olamaz")
                 .Length(1, 50);
+            //RuleFor(customer => customer.Password).NotNull().NotEmpty().WithMessage("Şifre Alanı Boş Olamaz")
+              //.Length(8, 50);
+            RuleFor(customer => customer.Mail).NotNull().NotEmpty().WithMessage("Mail Alanı Boş Olamaz")
+              .Length(10, 50);
         }
     }
 }
