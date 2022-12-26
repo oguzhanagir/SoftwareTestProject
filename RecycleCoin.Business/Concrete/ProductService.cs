@@ -47,9 +47,9 @@ namespace RecycleCoin.Business.Concrete
             }
         }
 
-        public Product? GetProduct(long id)
+        public IEnumerable<Product?> GetProductByCategory(int id)
         {
-            var products = _unitOfWork.Products.Get(x => x.Id == id);
+            var products = _unitOfWork.Products.GetList(x => x.CategoryId == id);
 
             return products;
         }

@@ -9,6 +9,7 @@ namespace RecycleCoin.Core.Repositories
 {
     public interface IGenericRepository<T>
     {
+        IEnumerable<T> GetList(Expression<Func<T, bool>> expression);
         T? Get(Expression<Func<T, bool>> expression);
         IEnumerable<T> GetAll();
         IEnumerable<T> GetAll(Expression<Func<T, bool>> expression);

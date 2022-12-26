@@ -24,6 +24,7 @@ namespace RecycleCoin.Infrastructure
             Category = new CategoryRepository(_context, _logger);
             Products = new ProductRepository(_context, _logger);
             Sales = new SaleRepository(_context,_logger);
+            Balances = new BalanceRepository(_context,_logger);
 
 
         }
@@ -35,6 +36,8 @@ namespace RecycleCoin.Infrastructure
         public IProductRepository Products { get; private set; }
 
         public ISaleRepository Sales { get; private set; }
+
+        public IBalanceRepository Balances { get; private set; }
 
         public async Task CommitAsync()
         {

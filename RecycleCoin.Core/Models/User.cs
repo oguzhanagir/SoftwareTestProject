@@ -16,9 +16,10 @@ namespace RecycleCoin.Core.Models
         public byte[]? PasswordHash { get; set; }
         public byte[]? PasswordSalt { get; set; }
 
+        public byte[]? ShaAddress { get; set; }
+
         public List<Sale>? Sales { get; set; }
 
-        public Address? Address { get; set; }
 
     }
 }

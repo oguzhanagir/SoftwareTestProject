@@ -31,6 +31,7 @@ namespace RecycleCoin.Api.Controllers
             user.FirstName = userDto.FirstName;
             user.LastName = userDto.LastName;
             user.Mail = userDto.Mail;
+            user.ShaAddress = System.Text.Encoding.UTF8.GetBytes(user.Mail!);
             user.PasswordSalt = passwordSalt;
             user.PasswordHash = passwordHash;
 
@@ -42,7 +43,7 @@ namespace RecycleCoin.Api.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult<User>> Login(string mail, string password)
         {
-            var userCheck = UserService!.Login(mail, password);
+            var userCheck =  UserService!.Login(mail, password);
                 
             if (userCheck == null)
             {
@@ -50,6 +51,8 @@ namespace RecycleCoin.Api.Controllers
             }
 
             var passwordCheck = VerifyPasswordHash(password!, userCheck!.PasswordHash!, userCheck.PasswordHash!);
+
+            
 
             if (!passwordCheck)
             {
@@ -105,5 +108,14 @@ namespace RecycleCoin.Api.Controllers
             }
         }
 
+        private byte[] ShaAddress(string mail)
+        {
+            using (var hmac = new HMACSHA256())
+            {
+                
+                return hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(mail));
+
+            }
+        }
     }
 }

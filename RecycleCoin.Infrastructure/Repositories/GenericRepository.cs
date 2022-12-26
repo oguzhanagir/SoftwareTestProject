@@ -48,6 +48,11 @@ namespace RecycleCoin.Infrastructure.Repositories
         {
             return _dbSet.FirstOrDefault(expression);
         }
+        public IEnumerable<T> GetList(Expression<Func<T, bool>> expression)
+        {
+            return _dbSet.Where(expression).AsEnumerable();
+        }
+
 
         public IEnumerable<T> GetAll()
             => _dbSet.AsEnumerable();

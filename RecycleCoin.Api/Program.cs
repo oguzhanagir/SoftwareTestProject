@@ -22,12 +22,22 @@ builder.Services.AddDbContext<RecycleCoinDbContext>(options =>
 });
 
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "ReclycCoin",
+        policy=>{
+            policy.WithOrigins("https://localhost:5238").AllowAnyHeader()
+                                .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
 builder.Services.AddScoped<IValidator<Sale>, SaleValidator>();
 builder.Services.AddScoped<IValidator<Category>, CategoryValidator>();
 builder.Services.AddScoped<IValidator<User>, UserValidator>();
+builder.Services.AddScoped<IValidator<Balance>, BalanceValidator>();
 
 builder.Services.AddAuthentication();
 
@@ -36,6 +46,7 @@ builder.Services.AddTransient(typeof(IUserService), typeof(UserService));
 builder.Services.AddTransient(typeof(ICategoryService), typeof(CategoryService));
 builder.Services.AddTransient(typeof(ISaleService), typeof(SaleService));
 builder.Services.AddTransient(typeof(IProductService), typeof(ProductService));
+builder.Services.AddTransient(typeof(IBalanceService), typeof(BalanceService));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -51,6 +62,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+
+
+app.UseCors(builder =>
+{
+    builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader();
+});
 
 app.UseAuthorization();
 app.UseAuthentication();

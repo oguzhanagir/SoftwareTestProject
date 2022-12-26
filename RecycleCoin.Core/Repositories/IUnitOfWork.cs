@@ -12,6 +12,7 @@ namespace RecycleCoin.Core.Repositories
         ICategoryRepository Category { get; }
         IProductRepository Products { get; }
         ISaleRepository Sales { get; }
+        IBalanceRepository Balances { get; }
         int Save();
         Task CommitAsync();
 

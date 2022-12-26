@@ -26,6 +26,7 @@ namespace RecycleCoin.Infrastructure.Concrete
         public DbSet<Sale>? Sales { get; set; }
         public DbSet<Role>? Roles { get; set; }
         public DbSet<UserRoleMapping>? UserRoleMappings  { get; set; }
+        public DbSet<Balance>? Balances  { get; set; }
 
 
        

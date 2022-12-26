@@ -13,7 +13,9 @@ namespace RecycleCoin.Core.Models
         public decimal? Quantity { get; set; }
         public decimal? Point { get; set; }
 
+        public virtual int? CategoryId { get; set; }
         public Category? Category { get; set; }
+
 
     }
 }

@@ -15,7 +15,7 @@ namespace RecycleCoin.Api.Controllers
         private  ICategoryService CategoryService { get; set; }
     
 
-        public CategoryController(ICategoryService categoryService, IValidator<Category> validator)
+        public CategoryController(ICategoryService categoryService)
         {
             CategoryService = categoryService;
         }

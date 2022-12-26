@@ -19,6 +19,8 @@ namespace RecycleCoin.Infrastructure.Configurations
 
             builder.Property(m => m.Name).IsRequired().HasMaxLength(50);
 
+            
+
             builder.ToTable("Categories");
         }
     }

@@ -29,7 +29,7 @@ namespace RecycleCoin.Api.Controllers
         public async Task<IActionResult>? AddProduct(Product product)
         {
             var result = await ProductService!.AddProduct(product);
-            if (!result.IsValid)
+            if (!result!.IsValid)
             {
                 return BadRequest(result.Errors);
             }
@@ -52,12 +52,13 @@ namespace RecycleCoin.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public Product? GetProduct(int id)
+        public IEnumerable<Product>? GetProductByCategory(int id)
         {
-            var product = ProductService.GetProduct(id);
-            return product;
+            var productList = ProductService.GetProductByCategory(id);
+            return productList;
 
         }
+
 
     }
 }

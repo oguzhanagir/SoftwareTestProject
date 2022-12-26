@@ -10,7 +10,7 @@ namespace RecycleCoin.Core.Services
 {
     public interface IProductService
     {
-        Product? GetProduct(long id);
+        IEnumerable<Product?> GetProductByCategory(int id);
 
         Task<IEnumerable<Product>> GetProducts();
 

@@ -23,10 +23,7 @@ namespace RecycleCoin.Infrastructure.Configurations
 
 
 
-            builder.HasOne(x => x.Category)
-                .WithMany(x => x.Products)
-                .HasForeignKey(x => x.Id)
-                .IsRequired(false).OnDelete(DeleteBehavior.Cascade);
+
                  
 
             builder.ToTable("Products");
