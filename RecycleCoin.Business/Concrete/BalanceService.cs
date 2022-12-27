@@ -6,6 +6,7 @@ using RecycleCoin.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,25 +31,28 @@ namespace RecycleCoin.Business.Concrete
             return balanceValue!;
         }
 
-        public async Task<ValidationResult?> Add(string shaAddress,decimal balanceValue)
+        public async Task<ValidationResult?> Add(int id,decimal balanceValue)
         {
-            var user = _unitOfWork.Users.Find(x => x.ShaAddress == System.Text.Encoding.UTF8.GetBytes(shaAddress));
+          
+            var user = _unitOfWork.Users.Find(x => x.Id == id);
             var balance = _unitOfWork.Balances.Find(x => x.User!.Id == user!.Id);
 
+            
             var convertValue = balanceValue / rcConverCarbon;
 
             balance!.Value = balance.Value + convertValue;
-            balance!.User = user;
+            balance.User!.Id = user!.Id;
 
             var validation = await _validator.ValidateAsync(balance!);
 
             if (validation.IsValid)
             {
-                _unitOfWork.Balances.Add(balance!);
+                _unitOfWork.Balances.Update(balance!);
                 await _unitOfWork.CommitAsync();
             }
 
             return validation;
+
 
         }
 
@@ -72,7 +76,9 @@ namespace RecycleCoin.Business.Concrete
 
 
             _unitOfWork.Balances.Update(balanceSender);
+            _unitOfWork.Save();
             _unitOfWork.Balances.Update(balanceReceiver);
+            _unitOfWork.Save();
 
 
         }

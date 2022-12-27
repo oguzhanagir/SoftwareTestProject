@@ -31,7 +31,7 @@ namespace RecycleCoin.Api.Controllers
             user.FirstName = userDto.FirstName;
             user.LastName = userDto.LastName;
             user.Mail = userDto.Mail;
-            user.ShaAddress = System.Text.Encoding.UTF8.GetBytes(user.Mail!);
+            user.ShaAddress = ShaAddress(userDto.Mail!);
             user.PasswordSalt = passwordSalt;
             user.PasswordHash = passwordHash;
 
@@ -41,13 +41,13 @@ namespace RecycleCoin.Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<User>> Login(string mail, string password)
+        public async Task<ActionResult<bool>> Login(string mail, string password)
         {
             var userCheck =  UserService!.Login(mail, password);
                 
             if (userCheck == null)
             {
-                return BadRequest("Kullanıcı Bulunamadı");
+                return BadRequest(false);
             }
 
             var passwordCheck = VerifyPasswordHash(password!, userCheck!.PasswordHash!, userCheck.PasswordHash!);
@@ -56,14 +56,14 @@ namespace RecycleCoin.Api.Controllers
 
             if (!passwordCheck)
             {
-                return BadRequest("Yanlış Şifre");
+                return BadRequest(false);
             }
 
-            string token = CreateToken(userCheck);
+            //string token = CreateToken(userCheck);
 
 
 
-            return Ok(token);
+            return Ok(true);
         }
 
         private string CreateToken(User user)
@@ -104,8 +104,14 @@ namespace RecycleCoin.Api.Controllers
             {
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 
-                return computedHash.SequenceEqual(passwordHash);
+                //return computedHash.SequenceEqual(passwordHash);
+                for (int i = 0; i < computedHash.Length; i++)
+                { 
+                    if (computedHash[i] == passwordHash[i])
+                        return false; 
+                }
             }
+            return true;
         }
 
         private byte[] ShaAddress(string mail)

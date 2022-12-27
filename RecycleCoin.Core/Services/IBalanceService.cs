@@ -11,7 +11,7 @@ namespace RecycleCoin.Core.Services
     public interface IBalanceService
     {
         decimal? Get(int id);
-        Task<ValidationResult?> Add(string shaAddress, decimal balanceValue);
+        Task<ValidationResult?> Add(int id, decimal balanceValue);
         void BalanceTransfer(int sender, int receiver, decimal valueCarbon);
     }
 }

@@ -24,9 +24,10 @@ namespace RecycleCoin.Api.Controllers
         }
 
         [HttpPost("AddBalance")]
-        public async Task<IActionResult>? AddBalance(string shaAddress, decimal balanceValue)
+        public async Task<IActionResult>? AddBalance(int id, decimal balanceValue)
         {
-            var result = await BalanceService!.Add(shaAddress, balanceValue);
+
+            var result = await BalanceService!.Add(id, balanceValue);
             if (!result!.IsValid)
             {
                 return BadRequest(result.Errors);
